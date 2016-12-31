@@ -1,0 +1,67 @@
+<%= render 'partial/navbar' %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="text-center">
+            <span style="font-size:24px;">お気に入りのワインをシェアする</span>
+          </div>
+        </div>
+      
+        <div class="panel-body">      
+          <!-- ここからフォーム -->
+          <%= form_for @listing do |f| %>
+            <div class="row">
+              <div class="col-md-12 select">
+                <div class="form-group">
+                  <label>ワイン名</label>
+                  <%= f.text_field :name, {placeholder: "カタカナで記入",required: 'true', autofocus: 'true', class: 'form-control'} %>
+                </div>
+              </div>
+            </div>
+            <br>
+
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>おおよその購入価格</label>
+                  <div class="input-group">
+                   <%= f.text_field :price, placeholder: "例: 2000", class: "form-control" %>
+                   <div class="input-group-addon">円</div>
+                 </div>  
+               </div>
+             </div>
+           </div>    
+            <br>
+  <div class="row">
+              <div class="col-md-12 select">
+                <div class="form-group">
+                  <label>赤、白、ロゼ</label>
+                    <%= f.select :wine_color, [["赤","赤"], ["白","白"], ["ロゼ","ロゼ"]], {prompt:"選択してください"}, {required: 'true', autofocus: 'true', class: 'form-control'} %>  
+                      </div>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                <div class="col-md-12 select">
+                  <div class="form-group">
+                    <label>ワインの説明</label>
+                    <%= f.text_area :wine_desc, {placeholder: "例：阪急オアシスで７年前に購入してから大好きなワインです",required: 'true', autofocus: 'true', class: 'form-control'} %>
+                  </div>
+                </div>
+              </div>
+              <br>
+
+            <div class="actions">
+              <%= f.submit "Save", class: "btn btn-danger" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
