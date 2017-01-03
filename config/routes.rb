@@ -18,5 +18,6 @@ Rails.application.routes.draw do
   get 'manage-listing/:id/country' => 'listings#country', as: 'manage_listing_country'
   get 'manage-listing/:id/photos' => 'listings#photos', as: 'manage_listing_photos'
   get 'manage-listing/:id/publish' => 'listings#publish', as: 'manage_listing_publish'
+  get 'manage-listing/:id/address' => 'listings#address', as: 'manage_listing_address'
 
 end

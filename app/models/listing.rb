@@ -5,4 +5,9 @@ class Listing < ActiveRecord::Base
   validates :name, presence: true
   validates :wine_color, presence: true
   validates :wine_desc, presence: true
-end
+
+
+  geocoded_by :address
+  after_validation :geocode, :if => :address_changed?
+
+  end
