@@ -45,48 +45,44 @@
       <div class="row">
         <div class="col-md-3 text-center row-space-2">
           <%= link_to user_path(@listing.user) do %>
+          <%= image_tag @listing.user.image,class:"img-circle profile-2"  %>
 
-
+<!-- if listing.photos.length > 0
+ -->
           <% end %>
           <h5><%= @listing.user.name %></h5>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-8">
           <div class="listing-title" style="font-size:24px;">
             <%= @listing.name %>
         </div>
-        <div class="row row-space-top-4">
-            <div class="col-sm-3 col-xs-3 text-center">
+            <div class="row row-space-top-4">
+             <div class="col-sm-2 col-xs-2 text-center">
               <i class="fa fa-home fa-3x"></i>
-              <h5><%= @listing.price %></h5>
-          </div>
-          <div class="col-sm-3 col-xs-3 text-center">
+              <h5><%= @listing.average_star_rate %></h5>
+            </div>
+
+            <div class="col-sm-2 col-xs-2 text-center">
+              <i class="fa fa-home fa-3x"></i>
+              <h5><%= @listing.price %>円</h5>
+            </div>
+            <div class="col-sm-2 col-xs-2 text-center">
               <i class="fa fa-linux fa-3x" aria-hidden="true"></i>
               <h5><%= @listing.wine_color %></h5>
-          </div>
-          <div class="colp-sm-3 col-xs-3 text-center">
+            </div>
+            <div class="colp-sm-2 col-xs-2 text-center">
               <i class="fa fa-bug fa-3x" aria-hidden="true"></i>
               <h5><%= @listing.country %></h5>
-          </div>
-          <div class="colp-sm-3 col-xs-3 text-center">
+            </div>
+            <div class="colp-sm-2 col-xs-2 text-center">
               <i class="fa fa-bug fa-3x" aria-hidden="true"></i>
               <h5><%= @listing.hinsyu %></h5>
+            </div>
           </div>
-      </div>
   </div>
 
   <div class="col-md-3">
-      <div class="panel panel-default panel-show">
-        <div class="panel-heading">
-          <span style="font-size:16px;"><%= @listing.price %>円（1瓶あたり）</span>
-      </div>
-      <div class="panel-body panel-real">
-          <%= form_for @listing, :html => { multipart: true } do |f| %>
-          <div class="actions text-center">
-            <%= f.submit "この日程で予約する", class: "btn btn-danger btn-wide" %>
-        </div>
-        <% end %>
-    </div>
-</div>
+     
 </div>
 </div>
 </div>
@@ -97,8 +93,8 @@
 <div class="container">
   <div class="row">
     <div class="col-md-9">
-      <h3 class="row-space-3">このリスティングについて</h3>
-      <p><%= @listing.wine_desc %><%= @listing.wine_desc %><%= @listing.wine_desc %><%= @listing.wine_desc %><%= @listing.wine_desc %><%= @listing.wine_desc %><%= @listing.wine_desc %><%= @listing.wine_desc %><%= @listing.wine_desc %><%= @listing.wine_desc %><%= @listing.wine_desc %><%= @listing.wine_desc %><%= @listing.wine_desc %><%= @listing.wine_desc %>
+      <h3 class="row-space-3">ワイン紹介</h3>
+      <p><%= @listing.wine_desc %>
       </p>
   </div>
 
@@ -109,16 +105,20 @@
 
 
 <!-- レビュー    -->
-<div class="row">
-    <div class="col-md-9">
-      <h3 class="row-space-3">レビュー</h3>
 
-  </div>
+<!-- レビュー     -->
+    <div class="row row-space-4">
+      <div class="col-md-9">
+        <h3 class="row-space-3">レビュー<%= @reviews.count %>件</h3>
+        <div id="average_star_rate"></div>
+          <%= render 'reviews/form' if !@currentUserReview %>
+          <%= render 'reviews/list' %>
+      </div>
 
-  <div class="col-md-3">
-
-  </div>
-</div>
+      <div class="col-md-3">
+      
+      </div>
+    </div>
 <!-- グーグルマップ -->
 <div class="row">
     <div class="col-md-9">
@@ -142,7 +142,7 @@
 <div class="row">
    <div class="col-md-9">
       <h3 class="row-space-3">近くのワイン愛好家</h3>
-      <% for listing in @listing.nearbys(10) %>
+     <% for listing in @listing.nearbys(10) %>
       <div class="col-md-3">
          <div class="panel panel-default">
             <div class="panel-heading panel-listing text-center" style="padding: 0;">
@@ -161,19 +161,16 @@
                  <div class="price-card">
                      <%= listing.price %> 円     
                  </div>
+               </div>
              </div>
+           </div>
          </div>
+       <% end %>
      </div>
- </div>
- <% end %>
-
+     <div class="col-md-3">
+   </div>
 </div>
 
-<div class="col-md-3">
-
-</div>
-
-</div>
 
 </div>
 
@@ -210,3 +207,10 @@
 <script async defer
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2WAhbQcTWG0At7bXg_TQ1C3jFAH1U1Fo&callback=initMap"></script>
 
+<script>
+  $("#average_star_rate").raty({
+      path: '/assets',
+      readOnly: true,
+      score: <%= @listing.average_star_rate %>
+  });
+</script>

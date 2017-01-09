@@ -5,7 +5,12 @@ class User < ActiveRecord::Base
   :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   has_many :listings
+  has_many :reviews
 
+
+  has_attached_file :image, :styles => { :medium => "400x400", :thumb => "100x100>" }, :default_url => "avatar-default.png"
+  validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
+  
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email

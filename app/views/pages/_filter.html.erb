@@ -1,0 +1,33 @@
+<!-- Search Form -->
+<%= search_form_for @search, url: search_path do |f| %>
+  <%= hidden_field_tag :search, session[:address],:id => "search-address" %>
+
+
+  <div class="filter">
+
+
+</div>
+<!-- 場所 -->
+    <div class="row filter-section">
+      <div class="col-md-1  text-center col-md-offset-1">
+        <h4>場所</h4>
+      </div>
+      <div class="col-md-8   col-xs-6 col-md-offset-1">
+    <%= hidden_field_tag :lat %>
+    <%= hidden_field_tag :lng %>
+        <%= text_field_tag :search, params[:search],placeholder:"近くのワイン愛好家を探す", class: "form-control" ,id:"pac-input"  %>
+      </div>
+    </div>
+
+
+
+    
+    <!-- Submitボタン -->
+    <div class="row filter-section">
+    <div class="col-md-9"></div>
+      <div class="col-md-3">
+        <%= f.submit "検索", class: "btn btn-danger" %>
+      </div>
+    </div>    
+  </divv>
+<% end %>

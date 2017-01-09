@@ -9,6 +9,10 @@ class ListingsController < ApplicationController
 
   def show
     @photos = @listing.photos
+
+    @reviews = @listing.reviews
+
+    @currentUserReview = @reviews.find_by(user_id:  current_user.id) if current_user
   end
 
   def new
@@ -56,9 +60,15 @@ end
 def publish
 end
 
+  def not_checked
+    @listing = Listing.find(params[:listing_id])
+    @listing.update(not_checked: params[:not_checked])
+    render :nothing => true
+  end
+
 private
 def listing_params
-  params.require(:listing).permit(:name, :price, :wine_color, :wine_desc, :country, :hinsyu, :sanchi, :hyouka, :smell, :shop, :address, :active)
+  params.require(:listing).permit(:name, :price, :wine_color, :wine_desc, :country, :hinsyu, :sanchi, :hyouka, :smell, :shop, :address, :active ,:not_checked )
 end
 
 def set_listing

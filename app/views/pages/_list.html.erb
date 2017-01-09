@@ -1,0 +1,39 @@
+
+
+<% if @arrlistings  %>
+    <div class="row filter-section">
+        <% @arrlistings.each do |listing| %>          
+            <div class="col-md-6">
+                <%= link_to listing do %>
+                    <div class="panel panel-default">
+                        <div class="panel-heading panel-listing text-center" style="padding: 0;">
+                            <%= link_to(listing) do %>
+                            <% if listing.photos.length > 0 %>
+                                <%= image_tag listing.photos[0].image.url(:medium)   %>
+                            <% else %>
+                                <%= image_tag listing.user.image.url(:medium)   %>
+                            <% end %>
+                            <% end %>
+                            <div class="price-card">
+                                    <%= listing.price %> 円
+                            </div>
+                        </div>
+
+
+                            <div class="panel-body"> 
+                                <div class="col-md-10 col-xs-10">
+                                    <a>ワイン名：<%= listing.name %></a><br />
+                                    <a>活動地域：<%= listing.address %></a><br />
+                                    <a>購入店舗：<%= listing.shop %></a>
+                                </div>
+                                <div class="col-md-2 col-xs-2">
+                                    <%= image_tag listing.user.image,class:"img-circle profile-1" %>
+                                </div>
+                            </div>
+
+                    </div>
+                <% end %>
+            </div>
+        <% end %>
+    </div>
+<% end %>
