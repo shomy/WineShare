@@ -90,7 +90,7 @@ Rails.application.configure do
     storage: :s3,
     s3_protocol: :https,
     s3_credentials: {
-      bucket: ENV.fetch('S3_BUCKET_NAME'),
+      bucket: ENV.fetch('winetest'),
       access_key_id: ENV.fetch('AWS_ACCESS_KEY_ID'),
       secret_access_key: ENV.fetch('AWS_SECRET_ACCESS_KEY'),
       # s3_region: ENV.fetch('ap-northeast-1'),
