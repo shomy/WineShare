@@ -58,25 +58,26 @@
         </div>
             <div class="row row-space-top-4">
              <div class="col-sm-2 col-xs-2 text-center">
-              <i class="fa fa-home fa-3x"></i>
-              <h5><%= @listing.average_star_rate %></h5>
+              <i class="fa fa-bar-chart fa-3x"></i>
+              <h5>平均評価：<%= @listing.average_star_rate %>点</h5>
+              <h6>(５点満点)</h6>
             </div>
 
             <div class="col-sm-2 col-xs-2 text-center">
-              <i class="fa fa-home fa-3x"></i>
+              <i class="fa fa-money fa-3x"></i>
               <h5><%= @listing.price %>円</h5>
             </div>
             <div class="col-sm-2 col-xs-2 text-center">
-              <i class="fa fa-linux fa-3x" aria-hidden="true"></i>
-              <h5><%= @listing.wine_color %></h5>
+              <i class="fa fa-flask fa-3x" aria-hidden="true"></i>
+              <h5><%= @listing.wine_color %>ワイン</h5>
             </div>
             <div class="colp-sm-2 col-xs-2 text-center">
-              <i class="fa fa-bug fa-3x" aria-hidden="true"></i>
-              <h5><%= @listing.country %></h5>
+              <i class="fa fa-globe fa-3x" aria-hidden="true"></i>
+              <h5>生産国：<%= @listing.country %></h5>
             </div>
             <div class="colp-sm-2 col-xs-2 text-center">
-              <i class="fa fa-bug fa-3x" aria-hidden="true"></i>
-              <h5><%= @listing.hinsyu %></h5>
+              <i class="fa fa-diamond fa-3x" aria-hidden="true"></i>
+              <h5>品種：<%= @listing.hinsyu %></h5>
             </div>
           </div>
   </div>
@@ -141,13 +142,17 @@
 </style>
 <div class="row">
    <div class="col-md-9">
-      <h3 class="row-space-3">近くのワイン愛好家</h3>
+      <h3 class="row-space-3">近くのワイン</h3>
      <% for listing in @listing.nearbys(10) %>
       <div class="col-md-3">
          <div class="panel panel-default">
             <div class="panel-heading panel-listing text-center" style="padding: 0;">
                <%= link_to(listing) do %>
-               <%= image_tag listing.photos[0].image.url(:medium)  if listing.photos.length > 0 %>
+               <% if listing.photos.length > 0 %>
+                                <%= image_tag listing.photos[0].image.url(:medium)   %>
+                            <% else %>
+                                <%= image_tag listing.user.image.url(:medium)   %>
+                            <% end %>
                <% end %>
            </div>
 
