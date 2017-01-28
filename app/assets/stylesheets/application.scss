@@ -535,7 +535,16 @@ section h3.section-subheading {
 }
 
 #search-result .panel-body{
-  height: 95px;
+  height: 10px;
+  padding: 15px;
+  height: 90px;
+  p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+      margin: 0;
+  }
+
 }
 
 #search-result .panel-body1{
