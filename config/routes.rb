@@ -1,4 +1,4 @@
-Rails.application.routes.draw do  
+Rails.application.routes.draw do
   resources :listings
 
   root :to => 'pages#index'
